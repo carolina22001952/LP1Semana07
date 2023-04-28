@@ -10,33 +10,31 @@ namespace PlayerStats
         private float highScore;
         private int playedGames, wonGames;
 
-        public int HighScore 
+        public float HighScore 
         {
             get => highScore;
             set
             {
-                if(newScore > highScore)
-                    highScore = newScore;
+                if(value > highScore)
+                    highScore = value;
             }
         }
 
         public string Name { get; }
-        public float WinRate 
-        { 
-
-        }
+        public float WinRate => playedGames == 0 ? 0f : (float)wonGames / 
+            playedGames;
 
         public void PlayGame(bool win)
         {
             playedGames++;
-            while(win == true)
+            if(win)
             {
                 wonGames++;
             }
 
         }
 
-        private Player(string name)
+        public Player(string name)
         {
             Name = name;
             this.highScore = 0;
